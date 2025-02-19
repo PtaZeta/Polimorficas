@@ -9,6 +9,7 @@ class Imagen extends Model
 {
     /** @use HasFactory<\Database\Factories\ImagenFactory> */
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'imagenes';
 
