@@ -9,7 +9,7 @@ class Comentario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['contenido', 'user_id', 'comentable_id', 'comentable_type'];
+    protected $fillable = ['contenido', 'user_id'];
 
     public function user()
     {
@@ -24,5 +24,12 @@ class Comentario extends Model
     public function comentarios()
     {
         return $this->morphMany(Comentario::class, 'comentable');
+    }
+
+    public function buscarComentarios()
+    {
+        return $this->hasMany(Comentario::class, 'comentable_id')
+            ->where('comentable_type', self::class)
+            ->with('user', 'buscarComentarios'); 
     }
 }

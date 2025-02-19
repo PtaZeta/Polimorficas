@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Imagen;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
 
 class ImagenController extends BaseController
 {
@@ -74,7 +74,11 @@ class ImagenController extends BaseController
      */
     public function edit(Imagen $imagen)
     {
-        //
+        Gate::authorize('update', $imagen);
+
+        return view('imagenes.edit', [
+            'imagen' => $imagen,
+        ]);
     }
 
     /**
@@ -82,7 +86,11 @@ class ImagenController extends BaseController
      */
     public function update(UpdateImagenRequest $request, Imagen $imagen)
     {
-        //
+        Gate::authorize('update', $imagen);
+
+        $imagen->fill($request->input());
+        $imagen->save();
+        return redirect()->route('home');
     }
 
     /**
