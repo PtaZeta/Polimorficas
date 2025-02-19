@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Imagen extends Model
 {
     /** @use HasFactory<\Database\Factories\ImagenFactory> */
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'imagenes';
 
@@ -24,5 +24,4 @@ class Imagen extends Model
     {
         return $this->morphMany(Comentario::class, 'comentable');
     }
-
 }

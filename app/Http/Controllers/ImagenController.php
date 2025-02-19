@@ -88,9 +88,11 @@ class ImagenController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Noticia $noticia)
+    public function destroy($id)
     {
-        $noticia->delete();
-        return redirect()->route('home');
+        $imagen = Imagen::findOrFail($id);
+        $imagen->delete();
+
+        return redirect()->back()->with('success', 'Imagen eliminada correctamente.');
     }
 }
